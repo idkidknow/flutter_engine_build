@@ -1,0 +1,18 @@
+solutions = [
+  {
+    "custom_deps": {},
+    "deps_file": "DEPS",
+    "managed": False,
+    "name": ".",
+    "safesync_url": "",
+
+    "url": "https://github.com/flutter/flutter.git@{hash}",
+
+    "custom_vars": {
+      "download_android_deps": False,
+      "download_windows_deps": False,
+      "download_fuchsia_deps": False,
+      "download_jdk": False,
+    },
+  },
+]

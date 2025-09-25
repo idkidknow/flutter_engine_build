@@ -15,7 +15,7 @@ os.environ["PATH"] += f":{root_dir.joinpath('depot_tools')}"
 output_dir = root_dir.joinpath("output")
 os.makedirs(output_dir, exist_ok=True)
 
-engine_src_dir = root_dir.joinpath("engine/src")
+engine_src_dir = root_dir.joinpath("flutter/engine/src")
 os.chdir(engine_src_dir)
 
 match os.environ["RUNTIME_MODE"]:

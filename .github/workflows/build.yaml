@@ -1,0 +1,42 @@
+on:
+  workflow_dispatch:
+    inputs:
+      flutterHash:
+        description: 'which commit'
+        required: true
+        type: string
+  
+jobs:
+  build:
+    strategy:
+      matrix:
+        mode: [DEBUG, PROFILE, RELEASE]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13' 
+
+      - name: setup env
+        env:
+          FLUTTER_HASH: ${{ inputs.flutterHash }}
+        run: python setup_env.py
+      
+      - name: build
+        env:
+          RUNTIME_MODE: ${{ matrix.mode }}
+        run: python build.py
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_${{ matrix.mode }}
+          path: output/
+  
